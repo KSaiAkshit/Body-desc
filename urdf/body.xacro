@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<robot name="body" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find body_description)/urdf/materials.xacro" />
+  <xacro:include filename="$(find body_description)/urdf/body.trans" />
+  <xacro:include filename="$(find body_description)/urdf/body.gazebo" />
+  <link name="base_link">
+    <inertial>
+      <origin xyz="2.261304950895171e-17 2.261304950895171e-17 0.06350000000000001" rpy="0 0 0" />
+      <mass value="50.516200611270555" />
+      <inertia ixx="0.271592" iyy="0.271592" izz="0.407388" ixy="0.0" iyz="0.0" ixz="0.0" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://body_description/meshes/base_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="silver" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://body_description/meshes/base_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="Component2_1">
+    <inertial>
+      <origin xyz="0.014540412678309876 -5.44395710305302e-09 0.1289220199614215" rpy="0 0 0" />
+      <mass value="39.62177815882108" />
+      <inertia ixx="0.251032" iyy="0.355554" izz="0.211171" ixy="0.0" iyz="-0.0" ixz="-0.012392" />
+    </inertial>
+    <visual>
+      <origin xyz="-0.0 -0.0 -0.127" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://body_description/meshes/Component2_1.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="silver" />
+    </visual>
+    <collision>
+      <origin xyz="-0.0 -0.0 -0.127" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://body_description/meshes/Component2_1.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="Component3_1">
+    <inertial>
+      <origin xyz="0.03051009937539322 -1.2074875850487595e-08 0.09736843104636222" rpy="0 0 0" />
+      <mass value="16.19129956233666" />
+      <inertia ixx="0.055046" iyy="0.125721" izz="0.088422" ixy="0.0" iyz="-0.0" ixz="0.008295" />
+    </inertial>
+    <visual>
+      <origin xyz="-0.0 -0.0 -0.381" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://body_description/meshes/Component3_1.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="silver" />
+    </visual>
+    <collision>
+      <origin xyz="-0.0 -0.0 -0.381" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://body_description/meshes/Component3_1.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="Rev1" type="continuous">
+    <origin xyz="0.0 0.0 0.127" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="Component2_1" />
+    <axis xyz="0.0 0.0 1.0" />
+  </joint>
+
+  <joint name="Rev2" type="continuous">
+    <origin xyz="0.0 0.0 0.254" rpy="0 0 0" />
+    <parent link="Component2_1" />
+    <child link="Component3_1" />
+    <axis xyz="0.0 0.0 1.0" />
+  </joint>
+
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so"></plugin>
+  </gazebo>
+</robot>
